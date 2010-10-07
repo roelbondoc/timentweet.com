@@ -1,0 +1,69 @@
+<div id="blog" class="section highlight">
+  <div class="post last-single-post">
+    <h2>Welcome <%=current_user.name%>,</h2>
+    <div class="entry">
+      <p>Use the form below to schedule your tweets.</p>
+      <% if current_user.time_zone.nil? %>
+        <p>You currently do not have a timezone set. All times are recorded in UTC. To set your timezone, please update your twitter account settings.</p>
+      <% else %>
+        <p>Your current timezone is <%=current_user.time_zone%></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3 class="left-marker">Schedule</h3>
+  <div id="commentform" class="post">
+    <% form_for @tweet do |f| %>
+      <% unless @tweet.errors.empty? %>
+        <div class="warning-box">
+          <h3>Please correct the following issues:</h3>
+          <%="<p>Status message "+@tweet.errors.on(:status)+"</p>" unless @tweet.errors.on(:status).nil?%>
+          <%="<p>Date "+@tweet.errors.on(:post_on)+"</p>" unless @tweet.errors.on(:post_on).nil?%>
+        </div>
+      <% end %>
+      <%=f.label :status, "Status Message"%>
+      <%=f.text_area :status %>
+      <%=f.label :post_on, "When"%>
+      <%=f.datetime_select :post_on, :start_year => Time.zone.now.year, :prompt => true, :discard_minute => true %><br/>
+      <%=f.submit "Schedule"%>
+    <% end %>
+  </div>
+  <div class="fix"></div>
+</div>
+
+<% unless @scheduled_tweets.empty? %>
+  <div class="section highlight">
+    <h3 class="left-marker">Upcoming</h3>
+    <div class="post last-single-post">
+      <% @scheduled_tweets.each do |tweet| %>
+        <div class="post-meta"><%=(tweet.post_on+tweet.user.time_offset).strftime("%B %d, %Y - %I:%M%p")%></div>
+        <div class="entry"><%=tweet.status%><p><%= link_to 'Delete', tweet_path(tweet), :method => :delete, :confirm => "Are you sure?" %></p></div>
+        <div class="divider"></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% unless @posted_tweets.empty? %>
+  <div class="section">
+    <h3 class="left-marker">Tweeted</h3>
+    <div class="post last-single-post">
+      <% @posted_tweets.each do |tweet| %>
+        <div class="post-meta"><%=(tweet.post_on+tweet.user.time_offset).strftime("%B %d, %Y - %I:%M%p")%></div>
+        <div class="entry"><%=tweet.status%></div>
+        <div class="divider"></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">  
+$(document).ready(function() {  
+  //$('#tweet_post_on').datetimepicker({  
+  //  ampm: true,
+  //  showMinute: false
+  //});  
+});  
+</script>  

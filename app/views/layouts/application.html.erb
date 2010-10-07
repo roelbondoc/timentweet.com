@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="twitter, schedule, tweet, time, social" />
+<meta name="Description" content="Schedule your tweets through Time n' Tweet. Just type your message and set the day and time you want it to go out!" />
+<title>Time n' Tweet - Just say when!</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.form.js"></script>
+<script type="text/javascript" src="/javascripts/custom.js"></script>
+<!--[if lte IE 6]>
+<script type="text/javascript" src="/javascripts/iepngfix_tilebg.js"></script>
+
+<style type="text/css">
+
+ #logo img, div#main-content, #footer, 
+ #footer img, .nextbutton img, .prevbutton img, 
+ #socials img, #twitter img, .left-marker, #header, .divider a, .quote, .arrowlist li, 
+ .download-box, .note-box, .warning-box, .info-box, 
+ .toggle-icon img { behavior: url(/stylesheets/iepngfix.htc) }  
+ 
+</style> 
+<![endif]-->
+<style type="text/css">
+#ui-timepicker-div dl{ text-align: left; }
+#ui-timepicker-div dl dt{ height: 25px; }
+#ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+</style> 
+</head>
+<body>
+<div id="wrapper">
+  <div id="header"><h1>Time n' Tweet</h1><h2>- Just say when!</h2></div>
+  <div id="main-content">
+    <div class="section" id="navigation">
+      <ul>
+        <li><%=link_to 'Home', '/' %></li>
+        <li><%=link_to 'Contact', contact_index_path%></li>
+        <% if logged_in? %>
+          <li><%=link_to 'Logout', logout_path%></li>
+        <% else %>
+          <li><%=link_to 'Login', login_path%></li>
+        <% end %>
+      </ul>
+    </div>
+    <% unless logged_in? %>
+      <div id="blog" class="section highlight">
+        <div class="post">
+          <h2>What is Time n' Tweet?</h2>
+          <div class="entry">
+            <p>Time n' Tweet lets you schedule a tweet.</p>
+          </div>
+        </div>
+        <div class="post">
+          <h2>How do I use Time n' Tweet?</h2>
+          <div class="entry">
+            <p>Schedule your tweets through our website. Just type your message and set the day and time you want it to go out!</p>
+            <p>We'll send your tweet at the time you schedule it. That's all there is to it!</p>
+          </div>
+        </div>
+        <div class="post last-single-post">
+          <h2>When can I get started?</h2>
+          <div class="entry">
+            <p>If you already have a twitter account, just click on the link below to login.</p>
+            <p>Once you are logged in you can start scheduling your tweets.</p>
+            <p>If you don't have a twitter account, its easy to sign up for one on <a href="http://www.twitter.com">Twitter.com</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="section" id="twitter">
+        <h3 class="left-marker">Start Here</h3>
+        <ul id="twitter_update_list">
+          <li>
+            <a href="/tweets">
+              <img src="images/twitter_icon.png" alt="" />
+              <p>Click here to login with your twitter account.</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+    <%=yield%>
+    <div class="section highlight" id="ads">
+      <script type="text/javascript"><!--
+      google_ad_client = "pub-0105320388201082";
+      /* 468x60, created 5/5/10 */
+      google_ad_slot = "3667667386";
+      google_ad_width = 468;
+      google_ad_height = 60;
+      //-->
+      </script>
+      <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+    </div>
+  </div>
+  <div id="footer">
+    <p class="footer-text">Copyright &copy; 2010 Timentweet.com - All rights reserved.</p>
+  </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-16146513-1");
+  pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

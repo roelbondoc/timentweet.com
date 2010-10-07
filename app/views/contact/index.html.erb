@@ -1,0 +1,33 @@
+<div class="section highlight">
+  <h3 class="left-marker"><a href="contact.htm" title="">Contact Me</a></h3>
+  <div id="submitform">
+    <div id="log"></div>
+    <form id="ajaxform" action="/contact" method="post">
+      <label for="fullname">Your Name</label>
+      <input name="contact[fullname]" id="fullname" type="text" value="" />
+      <label for="email">Email</label>
+      <input name="contact[email]" id="email" type="text" value="" />
+      <label for="message">Message*</label>
+      <textarea name="contact[message]" rows="10" cols="6" id="message"></textarea>
+      <input type="submit" id="submit" name="submit" value="Send Message" />
+    </form>
+  </div>
+  <div id="contact-info">
+    <p>Any comments and suggestions are welcome. Please use this form to contact me if you have any questions or issues.</p>
+    <p>- Time n' Tweet</p>
+  </div>
+  <div class="fix" ></div>
+</div>
+
+<script type="text/javascript">  
+$(document).ready(function() {  
+  $('#ajaxform').ajaxForm({
+  target: '#log',
+  success: function(responseText) 
+  {
+  	var x = $('div.success').text().length;
+  	if(x>0) $('#ajaxform').slideUp('slow');	
+  }
+  });
+});  
+</script>  
